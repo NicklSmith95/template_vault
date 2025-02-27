@@ -82,6 +82,10 @@ function M.browse_templates()
       end,
     }),
     previewer = template_previewer,
+    layout_strategy = "horizontal",
+    layout_config = {
+	preview_width = 0.5,
+    },
     sorter = conf.generic_sorter({}),
     attach_mappings = function(prompt_bufnr, map)
       actions.select_default:replace(function()
