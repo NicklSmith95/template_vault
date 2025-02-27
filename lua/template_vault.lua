@@ -55,13 +55,13 @@ function M.browse_templates()
   local action_state = require("telescope.actions.state")
   local previewer = require("telescope.previewers")
 	
-  local template_previewer = previewers.new_buffer_previewer({
+  local template_previewer = previewer.new_buffer_previewer({
 	title = "Template Preview",
 	define_preview = function(self, entry, status)
 
 	local content = M._read_file(entry.path)
 
-	vim.api.nvim_buf_set_lines(self.state.buffnr, 0, -1, false, vim.split(content, "\n"))
+	vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, vim.split(content, "\n"))
   end,
   })
   
