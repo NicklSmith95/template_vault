@@ -93,7 +93,6 @@ function M.browse_templates()
     end,
   }):find()
 
-})
 end
 
 -- Get all templates from the storage directory
