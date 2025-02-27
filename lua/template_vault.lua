@@ -53,6 +53,17 @@ function M.browse_templates()
   local conf = require("telescope.config").values
   local actions = require("telescope.actions")
   local action_state = require("telescope.actions.state")
+  local previewer = require("telescope.previewers")
+	
+  local template_previewer = previewers.new_buffer_previewer({
+	title = "Template Preview",
+	define_preview = function(self, entry, status)
+
+	local content = M._read_file(entry.path)
+
+	vim.api.nvim_buf_set_lines(self.state.buffnr, 0, -1, false, vim.split(content, "\n"))
+  end,
+  })
   
   -- Get all templates from storage
   local templates = M._get_all_templates()
@@ -70,6 +81,7 @@ function M.browse_templates()
         }
       end,
     }),
+    previewer = template_previewer,
     sorter = conf.generic_sorter({}),
     attach_mappings = function(prompt_bufnr, map)
       actions.select_default:replace(function()
@@ -80,6 +92,8 @@ function M.browse_templates()
       return true
     end,
   }):find()
+
+})
 end
 
 -- Get all templates from the storage directory
