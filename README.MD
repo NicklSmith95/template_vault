@@ -13,7 +13,7 @@ A Neovim plugin for managing and using code templates with Telescope integration
 ### Packer
 ```lua
 use {
-  'yourusername/template_vault.nvim',
+  'nicklsmith95/template_vault',
   requires = {'nvim-telescope/telescope.nvim'},
   config = function()
     require('template_vault').setup({
