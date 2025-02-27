@@ -53,22 +53,20 @@ function M.browse_templates()
   local conf = require("telescope.config").values
   local actions = require("telescope.actions")
   local action_state = require("telescope.actions.state")
-  local previewer = require("telescope.previewers")
-	
-  local template_previewer = previewer.new_buffer_previewer({
-	title = "Template Preview",
-	define_preview = function(self, entry, status)
-
-	local content = M._read_file(entry.path)
-
-	vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, vim.split(content, "\n"))
-  end,
+  local previewers = require("telescope.previewers")
+  
+  local template_previewer = previewers.new_buffer_previewer({
+    title = "Template Preview",
+    define_preview = function(self, entry, status)
+      local content = M._read_file(entry.path)
+      vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, vim.split(content, "\n"))
+    end,
   })
   
   -- Get all templates from storage
   local templates = M._get_all_templates()
   
-  pickers.new({}, {
+  pickers.new({ 
     prompt_title = "Templates",
     finder = finders.new_table({
       results = templates,
@@ -84,7 +82,7 @@ function M.browse_templates()
     previewer = template_previewer,
     layout_strategy = "horizontal",
     layout_config = {
-	preview_width = 0.5,
+      preview_width = 0.5,
     },
     sorter = conf.generic_sorter({}),
     attach_mappings = function(prompt_bufnr, map)
@@ -96,7 +94,6 @@ function M.browse_templates()
       return true
     end,
   }):find()
-
 end
 
 -- Get all templates from the storage directory
