@@ -23,6 +23,8 @@ use {
   end
 }```
 
+## Configuration
+
 ### Remaps
 Here are some sample remaps
 ```lua
