@@ -21,7 +21,8 @@ use {
     })
     require('telescope').load_extension('template_vault')
   end
-}```
+}
+```
 
 ## Configuration
 
